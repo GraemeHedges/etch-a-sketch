@@ -1,0 +1,45 @@
+html{
+   background: #991010;
+}
+
+body,html{
+    margin: 0px;
+    padding: 0px;
+}
+
+h1{
+    font-family: cursive;
+    font-size: 100px;
+    color: #FFFFFF;
+    text-shadow: 2px 2px .2rem #000000;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+h2{
+    font-family: cursive;
+    font-size: 30px;
+    color: #FFFFFF;
+    text-shadow: 2px 2px .2rem #000000;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+
+.buttons {
+    align-content: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(16,auto);
+    grid-gap: 0px;
+    grid-template-rows: auto;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.square{
+    border: 1px solid black;
+}
