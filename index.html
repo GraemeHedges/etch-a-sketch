@@ -9,65 +9,75 @@
     <div class = "header">
         <h1>Etch-a-Sketch</h1>
         </div>
-    <!--
-        <div class= "buttons">
         <button id="resetButton">Reset</button>
-        The control buttons will go here-->
     </div>
     <div id="container">
-        <!-- The container for the squares will go here-->
     </div>
     <script>
-        // function that takes an argument and creates an amount of divs
-        // equal to the argument inside the "container" div
-
-              
-        // function that takes an argument and creates an amount of divs
-        // equal to the argument inside the "container" div
-
         const container = document.getElementById("container");
+        const square = document.getElementsByClassName("square");
+        const reset = document.getElementById("resetButton");
 
+        
         function getSize(){
-            // prompts the user for a size
-            // asigns that size to the grid
-            // hard coded to return 16 for testing
-            return 16;
+            //need to filter out non numerical answers
+            //limit input to 128
+            let chosenSize = prompt("Enter a size");
+            return chosenSize;
         }
 
-
-
         function drawGrid(){
-            // gets the grid size from the user
             let size = getSize();
-            // calculates how many squares we should expect in the grid
             let totalSquares = size*size;
-            
-            // fixed value for testing - this will be adjusted to get value   from
-            // #container
-            // this should divide the length of the container by the number of
-            // squares we want out grid to be (i.e. 16x16) to calculate the size
-            // of the smaller squares
-            let squareSide = 960/size;
-            
+            let squareSide = 600/size; 
             for (i=1; i<=totalSquares;i++){
                 let newDiv = document.createElement("div");
                 newDiv.style.height = `${squareSide}px`;
                 newDiv.style.width = `${squareSide}px`;
-                newDiv.style.border = "1px dashed black";
                 container.appendChild(newDiv);
                 newDiv.classList.add("square");
+                newDiv.id =`square${i}`;
                 newDiv.style.fontSize = "8px";
-                newDiv.textContent =`${i}`;
-            }
-            console.log(size);
-            console.log(totalSquares);
-            console.log(squareSide);
+             }
         }
 
-        //listen for the mouseover/hover
-        //if the background colour isn't black, change it
+        function initialGrid(){
+            let size = 16;
+            let totalSquares = size*size;
+            let squareSide = 600/size; 
+            for (i=1; i<=totalSquares;i++){
+                let newDiv = document.createElement("div");
+                newDiv.style.height = `${squareSide}px`;
+                newDiv.style.width = `${squareSide}px`;
+                container.appendChild(newDiv);
+                newDiv.classList.add("square");
+                newDiv.id =`square${i}`;
+                newDiv.style.fontSize = "8px";
+             }
+        }
 
-drawGrid();
+        function removeGrid(){
+            let size = 16;
+            let totalSquares = size*size;
+            let squareSide = 600/size; 
+            for (i=1; i<=totalSquares;i++){
+                container.removeChild(container.lastChild);
+             }
+        }
+
+        container.addEventListener("mouseover", function(e){
+            let y = document.getElementById(e.target.id);
+            y.style.backgroundColor = "black";
+        });
+
+        reset.addEventListener("click", function(){
+            while (container.lastElementChild) {
+                container.removeChild(container.lastChild);
+            }
+            drawGrid()
+        });
+
+initialGrid();
 
     </script>
 </body>
