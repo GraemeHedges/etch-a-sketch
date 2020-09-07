@@ -8,7 +8,8 @@
 <body>
     <div class = "header">
         <h1>Etch-a-Sketch</h1>
-        </div>
+    </div>
+    <div id="buttons">
         <button id="resetButton">Reset</button>
     </div>
     <div id="container">
@@ -20,14 +21,17 @@
 
         
         function getSize(){
-            //need to filter out non numerical answers
-            //limit input to 128
             let chosenSize = prompt("Enter a size");
-            return chosenSize;
+            if (isNaN(chosenSize) || chosenSize > 128 || !chosenSize){
+                alert("Please enter a number below 128");
+                getSize();
+            } else {
+                return chosenSize; 
+            }        
         }
 
-        function drawGrid(){
-            let size = getSize();
+        function drawGrid(x){
+            let size = x;
             let totalSquares = size*size;
             let squareSide = 600/size; 
             for (i=1; i<=totalSquares;i++){
@@ -38,30 +42,6 @@
                 newDiv.classList.add("square");
                 newDiv.id =`square${i}`;
                 newDiv.style.fontSize = "8px";
-             }
-        }
-
-        function initialGrid(){
-            let size = 16;
-            let totalSquares = size*size;
-            let squareSide = 600/size; 
-            for (i=1; i<=totalSquares;i++){
-                let newDiv = document.createElement("div");
-                newDiv.style.height = `${squareSide}px`;
-                newDiv.style.width = `${squareSide}px`;
-                container.appendChild(newDiv);
-                newDiv.classList.add("square");
-                newDiv.id =`square${i}`;
-                newDiv.style.fontSize = "8px";
-             }
-        }
-
-        function removeGrid(){
-            let size = 16;
-            let totalSquares = size*size;
-            let squareSide = 600/size; 
-            for (i=1; i<=totalSquares;i++){
-                container.removeChild(container.lastChild);
              }
         }
 
@@ -74,10 +54,10 @@
             while (container.lastElementChild) {
                 container.removeChild(container.lastChild);
             }
-            drawGrid()
+            drawGrid(getSize());
         });
 
-initialGrid();
+drawGrid(16);
 
     </script>
 </body>
