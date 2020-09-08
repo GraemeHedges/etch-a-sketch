@@ -22,16 +22,15 @@ html{
  
  #container {
      margin: auto;
-     display: flex;
-     flex-wrap: wrap;
+     display: grid;
+     grid-template-columns: repeat(16, 1fr);
      border: 3px solid black;
      background-color: antiquewhite;
      width: 600px;
      height: 600px;
  }
  
- .square{
-   box-sizing: border-box;
+ .square{   
    background-color: antiquewhite;
    border : 0.5px dashed #55555523;
  }

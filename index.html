@@ -36,8 +36,7 @@
             let squareSide = 600/size; 
             for (i=1; i<=totalSquares;i++){
                 let newDiv = document.createElement("div");
-                newDiv.style.height = `${squareSide}px`;
-                newDiv.style.width = `${squareSide}px`;
+                container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
                 container.appendChild(newDiv);
                 newDiv.classList.add("square");
                 newDiv.id =`square${i}`;
