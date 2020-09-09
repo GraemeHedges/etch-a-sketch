@@ -11,6 +11,8 @@
     </div>
     <div id="buttons">
         <button id="resetButton">Reset</button>
+        <button id="drawBlackButton">Black</button>
+        <button id="drawRandomButton">Random</button>
     </div>
     <div id="container">
     </div>
@@ -18,7 +20,8 @@
         const container = document.getElementById("container");
         const square = document.getElementsByClassName("square");
         const reset = document.getElementById("resetButton");
-
+        const drawBlackSquare = document.getElementById("drawBlackButton");
+        const drawRandomSquare = document.getElementById("drawRandomButton");
         
         function getSize(){
             let chosenSize = prompt("Enter a size");
@@ -33,7 +36,6 @@
         function drawGrid(x){
             let size = x;
             let totalSquares = size*size;
-            let squareSide = 600/size; 
             for (i=1; i<=totalSquares;i++){
                 let newDiv = document.createElement("div");
                 container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
@@ -44,19 +46,43 @@
              }
         }
 
-        container.addEventListener("mouseover", function(e){
-            let y = document.getElementById(e.target.id);
+        function drawBlack(){
+            container.addEventListener("mouseover", function(e){
+            let y = document.getElementById(e.target.id);   
             y.style.backgroundColor = "black";
-        });
+         });
+        }
+
+        function drawRandom(){
+            container.addEventListener("mouseover", function(e){
+            let y = document.getElementById(e.target.id);   
+            y.style.backgroundColor = randomColor();
+         });            
+        }
+
+        function randomColor(){
+            let randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+            return randomColor;
+        }       
 
         reset.addEventListener("click", function(){
             while (container.lastElementChild) {
                 container.removeChild(container.lastChild);
             }
+            container.style.backgroundColor = "antiquewhite";
             drawGrid(getSize());
         });
 
+        drawBlackSquare.addEventListener("click",function(){
+            drawBlack();
+        });
+
+        drawRandomSquare.addEventListener("click", function(){
+            drawRandom();
+        });
+
 drawGrid(16);
+drawBlack();
 
     </script>
 </body>
